@@ -1,0 +1,7 @@
+{
+  "name": "pagina_web_comics",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
