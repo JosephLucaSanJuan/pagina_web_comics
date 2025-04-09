@@ -1,3 +1,24 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu #menu side="start" menuId="mainMenu" contentId="mainContent">
+    <!--nav slot="end">
+      <div class="topnav" id="myTopnav">
+        <a href="#home">Inicio</a>
+        <a href="#comics">Comics</a>
+        <a href="#categories">Categorías</a>
+      </div>
+    </nav-->
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="menu.close()" routerLink="/home">Inicio</ion-item>
+        <ion-item (click)="menu.close()" routerLink="/comics">Comics</ion-item>
+        <ion-item (click)="menu.close()" routerLink="/categories">Categorías</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="mainContent"></ion-router-outlet>
 </ion-app>
