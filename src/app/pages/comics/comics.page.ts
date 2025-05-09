@@ -26,6 +26,7 @@ export class ComicsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getComics()
   }
   
   pick:any = null
@@ -34,7 +35,7 @@ export class ComicsPage implements OnInit {
   pageSize:number = 25
 
   getComics(notify:HTMLIonInfiniteScrollElement|null=null){
-    this.comicSVC.getAll().subscribe({
+    this.comicSVC.getAll(this.page, this.pageSize).subscribe({
       next:(response:Paginated<Comic>)=>{
         this._comics.next([...this._comics.value, ...response.data])
         this.page++

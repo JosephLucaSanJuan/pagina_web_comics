@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: "https://docs.google.com/spreadsheets/d/1UlxYXjmLHVbsiDsdppT0yOTYmmDEFryrnAfGMnFdUEU/edit?gid=352249383"
+  apiURL: "http://localhost:1337"
 };
 
 /*

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { IBaseRepository, SearchParams } from '../interfaces/Base-repository.interface';
+import { IBaseRepository, SearchParams } from '../interfaces/base-repository.interface';
 import { Observable, of } from 'rxjs';
 import { NAME_RESOURCE_TOKEN, REPOSITORY_MAPPING_TOKEN } from '../repository.tokens';
 import { IBaseMapping } from '../interfaces/base-mapping.interface';

@@ -13,4 +13,25 @@
       <ion-title size="large">comics</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!--ion-grid>
+    <ion-row class="ion-justify-content-start">
+      <ion-col size="12" size-sm="6" size-md="4" size-lg="4">
+        <ion-card class="comic-card">
+          <ion-card-header>
+            <ion-card-title></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Autor: {{c.autor}}</p>
+            <p>Pulicado en {{c.fechaPublicacion}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid-->
+  <ion-list>
+    <ion-item *ngFor="let c of (comic$ | async); let i = index">
+      <ion-label>{{c.titulo}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

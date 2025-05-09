@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { Comic } from "../../models/comic.model";
 import { COMICS_REPOSITORY_TOKEN } from "../../repositories/repository.tokens";
-import { IBaseRepository } from "../../repositories/interfaces/Base-repository.interface";
+import { IBaseRepository } from "../../repositories/interfaces/base-repository.interface";
 import { BaseService } from "./base-service.service";
 
 @Injectable({

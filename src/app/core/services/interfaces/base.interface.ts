@@ -1,6 +1,6 @@
 import { Observable } from "rxjs"
 import { Paginated } from "../../models/paginated.model"
-import { SearchParams } from "../../repositories/interfaces/Base-repository.interface"
+import { SearchParams } from "../../repositories/interfaces/base-repository.interface"
 
 export interface IBaseService<T> {
     getAll():Observable<T[]>

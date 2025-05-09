@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { IBaseRepository } from "./interfaces/Base-repository.interface";
+import { IBaseRepository } from "./interfaces/base-repository.interface";
 import { IBaseMapping } from "./interfaces/base-mapping.interface";
 
 export const NAME_RESOURCE_TOKEN = new InjectionToken<string>('NameResource')
@@ -17,3 +17,4 @@ export const CATEGORIES_REPOSITORY_TOKEN = new InjectionToken<IBaseRepository<an
 export const REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>('IBaseRepositoryMapping')
 export const COMICS_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>('IComicsRepositoryMapping')
 export const CATEGORIES_REPOSITORY_MAPPING_TOKEN = new InjectionToken<IBaseMapping<any>>('ICategoriesRepositoryMapping')
+export const BACK_END_TOKEN = new InjectionToken<string>('BackEnd')
