@@ -1,0 +1,55 @@
+ion-grid {
+    float: left;
+    width: 100%;
+    height:100%;
+    text-align: center;
+    padding: 10px;
+}
+
+ion-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-engine {
+    width: 80%;
+    height: 50%;
+}
+
+.comic-card {
+    width: 100%;
+    height: 100%;
+    //border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.thumb {
+    text-align: center;
+    margin: 2px;
+    border: 1px solid white;
+    background-color: white;
+    width:100%;
+    height:100%;
+    padding-top: 100%;
+    position: relative;
+}
+
+.image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}

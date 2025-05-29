@@ -25,11 +25,18 @@ export class ComicsRepositoryHttpService implements IBaseMapping<Comic> {
     getOne(data: ComicRaw): Comic {
         return {
             id:data.id,
-            titulo:data.title,
-            autor:data.autor,
-            fechaPublicacion:data.fechaPublicacion,
-            etiquetas:data.tematica,
-            comentarios:data.comentarios
+            title:data.title,
+            author:data.autor,
+            publishing_date:data.fechaPublicacion,
+            categories:data.tematica,
+            comentaries:data.comentarios,
+            cover:(data as any)["cover"]?{
+                url:(data as any)["cover"].url,
+                small:(data as any)["cover"].large,
+                medium:(data as any)["cover"].medium,
+                large:(data as any)["cover"].large,
+                thumbnail:(data as any)["cover"].thumbnail
+            }:undefined
         };
     }
 }

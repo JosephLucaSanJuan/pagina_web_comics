@@ -5,10 +5,12 @@ import { IBaseMapping } from "./interfaces/base-mapping.interface";
 export const NAME_RESOURCE_TOKEN = new InjectionToken<string>('NameResource')
 export const COMIC_NAME_RESOURCE_TOKEN = new InjectionToken<string>('ComicNameResource')
 export const CATEGORY_NAME_RESOURCE_TOKEN = new InjectionToken<string>('CategoryNameResource')
+export const COMIC_PROFILE_NAME_RESOURCE_TOKEN = new InjectionToken<string>('ComicProfileNameResource')
 
 export const API_URL_TOKEN = new InjectionToken<string>('ApiUrl')
 export const COMICS_API_URL_TOKEN = new InjectionToken<string>('ComicsApiUrl')
 export const CATEGORIES_API_URL_TOKEN = new InjectionToken<string>('CategoriesApiUrl')
+export const COMIC_PROFILE_API_URL_TOKEN = new InjectionToken<string>('ComicProfileApiUrl')
 
 export const REPOSITORY_TOKEN = new InjectionToken<IBaseRepository<any>>('REPOSITORY_TOKEN')
 export const COMICS_REPOSITORY_TOKEN = new InjectionToken<IBaseRepository<any>>('COMICS_REPOSITORY_TOKEN')

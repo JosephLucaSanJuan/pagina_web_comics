@@ -44,4 +44,8 @@ export class ComicsPage implements OnInit {
     })
   }
 
+  seeComic(id:string){
+    this.router.navigateByUrl('/comics/'+id)
+  }
+
 }

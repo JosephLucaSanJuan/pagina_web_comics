@@ -10,6 +10,13 @@ export interface ComicRaw {
     fechaPublicacion:Date
     tematica:string
     comentarios:string
+    cover:{
+        url: string
+        small: string
+        medium: string
+        large: string
+        thumbnail: string
+    }
 }
 
 @Injectable({
@@ -17,18 +24,25 @@ export interface ComicRaw {
 })
 export class ComicsRepositoryLocalStorage implements IBaseMapping<Comic> {
     getPaginated(page: number, pageSize: number, pages: number, data: ComicRaw[]): Paginated<Comic> {
-        return {page:page, pageSize, pages:pages, data:data.map<Comic>((c:ComicRaw)=>{
+        return {page:page, pageSize:pageSize, pages:pages, data:data.map<Comic>((c:ComicRaw)=>{
             return this.getOne(c)
         })};
     }
     getOne(data: ComicRaw): Comic {
         return {
             id:data.id,
-            titulo:data.title,
-            autor:data.autor,
-            fechaPublicacion:data.fechaPublicacion,
-            etiquetas:data.tematica,
-            comentarios:data.comentarios
+            title:data.title,
+            author:data.autor,
+            publishing_date:data.fechaPublicacion,
+            categories:data.tematica,
+            comentaries:data.comentarios,
+            cover:{
+                url: data.cover.url,
+                small: data.cover.small,
+                medium: data.cover.medium,
+                large: data.cover.large,
+                thumbnail: data.cover.thumbnail
+            }
         };
     }
 }
