@@ -20,11 +20,11 @@
         <ion-col size="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let c of (categories$ | async); let i = index">
           <ion-card class="category-card" (click)="seeComics(c.id)">
             <ion-card-header>
-              <div class="thumb">
+              <!--div class="thumb">
                 <div class="image-container">
                   <img [src]="c.picture?.thumbnail" alt="Image">
                 </div>
-              </div>
+              </div-->
               <ion-card-title>{{c.label}}</ion-card-title>
             </ion-card-header>
           </ion-card>

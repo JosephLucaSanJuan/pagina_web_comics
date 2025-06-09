@@ -39,12 +39,13 @@ export class CategoriesPage implements OnInit {
         this._categories.next([...this._categories.value, ...response.data])
         this.page++
         notify?.complete()
+        console.log(response)
       }
     })
   }
 
   seeComics(id:string) {
-    this.router.navigateByUrl('/comics/'+id)
+    this.router.navigateByUrl('/categories/'+id)
   }
 
 }

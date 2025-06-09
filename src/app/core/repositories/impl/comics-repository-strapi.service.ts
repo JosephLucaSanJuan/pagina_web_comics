@@ -8,8 +8,20 @@ interface MediaRaw {
     data: StrapiMedia
 }
 
+interface CategoryRaw {
+    data:CategoryData
+    meta:Meta
+}
+
+interface CategoryData {
+    id:number
+    label:string
+    comics: ComicRaw[] | number[] | null
+    picture:MediaRaw | number | null
+}
+
 interface ComicRaw {
-    data:Data,
+    data:ComicData,
     meta:Meta
 }
 
@@ -20,12 +32,13 @@ interface ComicRaw {
 interface ComicAttributes {
 }*/
 
-interface Data {
+interface ComicData {
     id:number
     title:string
     autor:string
+    synopsis:string
     fechaPublicación:Date
-    tematica:string
+    tematica: CategoryRaw[] | number[] | null
     comentarios:string
     cover: MediaRaw | number | null
     //attributes:ComicAttributes
@@ -37,25 +50,32 @@ interface Meta {}
     providedIn: 'root'
 })
 export class ComicsRepositoryStrapiService implements IBaseMapping<Comic> {
-    getPaginated(page: number, pageSize: number, pages: number, data: Data[]): Paginated<Comic> {
-        return {page:page, pageSize:pageSize, pages:pages, data:data.map<Comic>((d:Data)=>{
+    getPaginated(page: number, pageSize: number, pages: number, data: ComicData[]): Paginated<Comic> {
+        return {page:page, pageSize:pageSize, pages:pages, data:data.map<Comic>((d:ComicData)=>{
             return this.getOne(d)
         })};
     }
-    getOne(data: Data | ComicRaw): Comic {
-        const isComicRaw = (data:Data | ComicRaw): data is ComicRaw => 'meta' in data
+    getOne(data: ComicData | ComicRaw): Comic {
+        const isComicRaw = (data:ComicData | ComicRaw): data is ComicRaw => 'meta' in data
         const id = isComicRaw(data) ? data.data.id : data.id
         const attributes = isComicRaw(data) ? data.data : data
         return {
             id:id.toString(),
             title:attributes.title,
             author:attributes.autor,
-            publishing_date:attributes.fechaPublicación,
-            categories:attributes.tematica,
-            comentaries:attributes.comentarios,
-            cover:typeof attributes.cover === 'object'?{
-                url:attributes.cover?.data?.attributes.url,
-                small:attributes.cover?.data?.attributes.url,
+            synopsis: attributes.synopsis,
+            publishing_date: attributes.fechaPublicación,
+            categories: Array.isArray(attributes.tematica)
+                ? attributes.tematica.map((cat: any) =>
+                    typeof cat === 'object' && cat !== null && 'id' in cat
+                        ? cat.id.toString() : typeof cat === 'number'
+                        ? cat.toString() : ''
+                ).filter((c: string) => c !== '') : undefined,
+            comentaries: attributes.comentarios,
+            cover: typeof attributes.cover === 'object' && attributes.cover !== null && 'data' in attributes.cover
+            ? {
+                url: (attributes.cover as any).data?.attributes?.url,
+                small: (attributes.cover as any).data?.attributes?.url,
                 medium:attributes.cover?.data?.attributes.url,
                 large:attributes.cover?.data?.attributes.url,
                 thumbnail:attributes.cover?.data?.attributes.url

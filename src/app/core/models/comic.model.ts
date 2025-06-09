@@ -3,9 +3,10 @@ import { Model } from "./base.model";
 export interface Comic extends Model {
     title:string,
     author:string,
-    categories:string,
+    synopsis:string,
+    categories?:string[],
     publishing_date:Date,
-    comentaries:string,
+    comentaries?:string,
     cover?:{
         url:string | undefined,
         small:string | undefined,

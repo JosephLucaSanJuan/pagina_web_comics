@@ -1,7 +1,8 @@
 import { Model } from "./base.model";
 
-export interface Category extends Model{
+export interface Category extends Model {
     label:string,
+    comic?:string[]
     picture?:{
         url:string | undefined,
         small:string | undefined,

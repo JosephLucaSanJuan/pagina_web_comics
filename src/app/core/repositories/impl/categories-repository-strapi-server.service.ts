@@ -16,7 +16,24 @@ interface CategoryRaw {
 interface Data {
     id:number
     label:string
+    comics: ComicRaw[] | number[] | null
     picture: MediaRaw | number | null
+}
+
+interface ComicRaw {
+    data:ComicData,
+    meta:Meta
+}
+
+interface ComicData {
+    id:number
+    title:string
+    autor:string
+    synopsis:string
+    fechaPublicación:Date
+    tematica: CategoryRaw[] | number[] | null
+    comentarios:string
+    cover: MediaRaw | number | null
 }
 
 interface Meta {}

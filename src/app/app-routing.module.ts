@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/categories/categories.module').then( m => m.CategoriesPageModule)
   },
   {
-    path: 'comic-profile',
+    path: 'comics/comic/:id',
     loadChildren: () => import('./pages/comic-profile/comic-profile.module').then( m => m.ComicProfilePageModule)
   },
 ];

@@ -29,6 +29,7 @@
       </div>
     </ion-item>
 
+    <div id="content" *ngIf="category && category.id">
     <ion-grid>
       <ion-row class="ion-justify-content-start">
         <ion-col size="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let c of (comic$ | async); let i = index">
@@ -49,6 +50,25 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+    </div>
+    <div id="content" *ngIf="!category || !category.id">
+      <ion-grid>
+        <ion-row class="ion-justify-content-start">
+          <ion-col size="12" size-sm="6" size-md="4" size-lg="4" *ngFor="let c of (comic$ | async); let i = index">
+            <ion-card class="comic-card" (click)="seeComic(c.id)" button>
+              <ion-card-header>
+                <div class="thumb">
+                  <div class="image-container">
+                    <img [src]="c.cover?.thumbnail || 'https://ionicframework.com/docs/img/demos/card-media.png'" alt="Cover">
+                  </div>
+                </div>
+                <ion-card-title>{{c.title}}</ion-card-title>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
     <!--ion-list>
       <ion-item>
         <ion-label></ion-label>

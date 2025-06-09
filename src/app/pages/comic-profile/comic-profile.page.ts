@@ -23,6 +23,13 @@ export class ComicProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.comic) {
+      this.route.params.subscribe(params => {
+        this.comicSVC.getById(params['id']).subscribe(comic => {
+          this.comic = comic ?? undefined;
+        });
+      });
+    }
   }
-
+  
 }

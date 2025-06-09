@@ -23,9 +23,9 @@ export class CategoriesRepositoryJSONService implements IBaseMapping<Category> {
             id:data.id,
             label:data.label,
             picture:(data as any)["picture"]?{
-                url:(data as any)["inisignia"].url,
+                url:(data as any)["picture"].url,
                 small:(data as any)["picture"].large,
-                medium:(data as any)["inisignia"].medium,
+                medium:(data as any)["picture"].medium,
                 large:(data as any)["picture"].large,
                 thumbnail:(data as any)["picture"].thumbnail
             }:undefined

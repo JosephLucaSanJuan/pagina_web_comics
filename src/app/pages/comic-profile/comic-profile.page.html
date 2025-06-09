@@ -1,8 +1,8 @@
-<ion-header [translucent]="true">
+<!--ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>comic-profile</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header-->
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
@@ -15,15 +15,21 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-item>
-            <h2></h2>
-          </ion-item>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{comic?.title}}</ion-card-title>
+              <ion-card-subtitle>{{comic?.author}}, {{comic?.publishing_date}}</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col></ion-col>
         <ion-col>
-          <p></p>
+          <img [src]="comic?.cover?.thumbnail" alt="Cover">
+        </ion-col>
+        <ion-col>
+          <p>{{comic?.synopsis}}</p><br>
+          <p>{{comic?.comentaries}}</p><br>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -7,6 +7,7 @@ export interface ComicRaw {
     id:string
     title:string
     autor:string
+    synopsis:string
     fechaPublicacion:Date
     tematica:string
     comentarios:string
@@ -27,8 +28,9 @@ export class ComicsRepositoryHttpService implements IBaseMapping<Comic> {
             id:data.id,
             title:data.title,
             author:data.autor,
+            synopsis:data.synopsis,
             publishing_date:data.fechaPublicacion,
-            categories:data.tematica,
+            categories:(data as any)["tematica"].tematica??'',
             comentaries:data.comentarios,
             cover:(data as any)["cover"]?{
                 url:(data as any)["cover"].url,

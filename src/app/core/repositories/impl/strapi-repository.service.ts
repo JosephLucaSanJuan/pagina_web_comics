@@ -47,10 +47,13 @@ export class StrapiRepositoryService<T extends Model> extends HttpBaseRepository
         return this.http.get<T>(`${this.apiUrl}/${this.resource}/${id}`,).pipe(map(res=>this.mapping.getOne(res)));
     }
 
-    override getAll(page: number, pageSize: number, filters?: SearchParams): Observable<Paginated<T> | T[]> {
+    override getAll(page: number, pageSize: number, filters: SearchParams = {}): Observable<Paginated<T> | T[]> {
+        let search: string = Object.entries(filters)
+            .map(([k, v]) => `filters[${k}]=${v}`)
+            .reduce((p, v) => `${p}${v}`, "")
         if (page!=-1) {
             return this.http.get<PaginatedRaw<T>>(
-                `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}`
+                `${this.apiUrl}/${this.resource}?pagination[page]=${page}&pagination[pageSize]=${pageSize}&${search}`
             ).pipe(map(res=>{
                 if (res.meta) {
                     return this.mapping.getPaginated(page, pageSize, res.meta.pagination.total, res.data)

@@ -22,7 +22,7 @@ import { CategoryService } from './core/services/impl/category-service.service';
     { provide: BACK_END_TOKEN, useValue: 'strapi' },
     { provide: COMIC_NAME_RESOURCE_TOKEN, useValue: 'comics' },
     { provide: CATEGORY_NAME_RESOURCE_TOKEN, useValue: 'categories' },
-    { provide: COMIC_PROFILE_NAME_RESOURCE_TOKEN, useValue: 'comic' },
+    { provide: COMIC_PROFILE_NAME_RESOURCE_TOKEN, useValue: 'comics/comic' },
     { provide: COMICS_API_URL_TOKEN, useValue: `${environment.apiURL}/api` },
     { provide: CATEGORIES_API_URL_TOKEN, useValue: `${environment.apiURL}/api` },
     { provide: COMIC_PROFILE_API_URL_TOKEN, useValue: `${environment.apiURL}/api` },

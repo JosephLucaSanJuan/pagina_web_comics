@@ -22,7 +22,7 @@ export class BaseService<T extends Model> implements IBaseService<T> {
   getAll(page:number, pageSize:number, filters:SearchParams): Observable<Paginated<T>>
 
   getAll(page?:number, pageSize?:number, filters?:SearchParams): Observable<Paginated<T>|T[]> {
-    if (page == undefined || pageSize == undefined) {
+    if (page === undefined || pageSize === undefined) {
       return this.repository.getAll(1, 25, {})
     } else {
       return this.repository.getAll(page, pageSize, filters??{})
