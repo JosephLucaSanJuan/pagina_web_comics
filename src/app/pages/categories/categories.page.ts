@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Category } from 'src/app/core/models/category.model';
 import { Paginated } from 'src/app/core/models/paginated.model';
@@ -20,6 +20,7 @@ export class CategoriesPage implements OnInit {
   constructor(
     private categorySVC: CategoryService,
     private router: Router,
+    private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController
   ) { }
@@ -46,6 +47,27 @@ export class CategoriesPage implements OnInit {
 
   seeComics(id:string) {
     this.router.navigateByUrl('/categories/'+id)
+  }
+
+  private async presentModalCategory(category: Category | undefined = undefined) {
+    const modal = await this.modalCtrl.create({
+      component: CategoriesPage
+    });
+    modal.onDidDismiss().then(async (response: any) => {
+      if (category) {
+        this.categorySVC.getById(category.id).subscribe({
+          next: (response) => {
+            this.getCategories()
+          },
+          error: err => {}
+        });
+      }
+    });
+    await modal.present();
+  }
+
+  onIonInfinite(ev:InfiniteScrollCustomEvent) {
+    this.getCategories(ev.target)
   }
 
 }

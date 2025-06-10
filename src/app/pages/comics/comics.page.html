@@ -15,19 +15,20 @@
   </ion-header>
 
   <div id="container">
-    <ion-item>
+    <!--ion-item>
       <div class="comic-list__search container--small">
         <div class="search-input search-input--large">
           <ion-icon name="search-outline"></ion-icon>
-          <!--i class="search-input__icon">
+          <i class="search-input__icon">
             <svg>
               <use xlink:href="#search-outline"></use>
             </svg>
-          </i-->
+          </i>
           <ion-input placeholder="Buscador" type="text" value></ion-input>
         </div>
       </div>
-    </ion-item>
+    </ion-item-->
+    <ion-searchbar></ion-searchbar>
 
     <div id="content" *ngIf="category && category.id">
     <ion-grid>
@@ -37,7 +38,7 @@
             <ion-card-header>
               <div class="thumb">
                 <div class="image-container">
-                  <img [src]="c.cover?.thumbnail" alt="Cover">
+                  <img [src]="c.cover?.thumbnail || 'https://ionicframework.com/docs/img/demos/card-media.png'" alt="Cover">
                 </div>
               </div>
               <ion-card-title>{{c.title}}</ion-card-title>
@@ -74,5 +75,9 @@
         <ion-label></ion-label>
       </ion-item>
     </ion-list-->
+
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 </ion-content>

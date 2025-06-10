@@ -76,9 +76,9 @@ export class ComicsRepositoryStrapiService implements IBaseMapping<Comic> {
             ? {
                 url: (attributes.cover as any).data?.attributes?.url,
                 small: (attributes.cover as any).data?.attributes?.url,
-                medium:attributes.cover?.data?.attributes.url,
-                large:attributes.cover?.data?.attributes.url,
-                thumbnail:attributes.cover?.data?.attributes.url
+                medium:(attributes.cover as any).data?.attributes.url,
+                large:(attributes.cover as any).data?.attributes.url,
+                thumbnail:(attributes.cover as any).data?.attributes.url
             }:undefined
         };
     }

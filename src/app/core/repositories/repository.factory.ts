@@ -1,5 +1,5 @@
 import { FactoryProvider } from "@angular/core";
-import { BACK_END_TOKEN, CATEGORIES_API_URL_TOKEN, CATEGORIES_REPOSITORY_MAPPING_TOKEN, CATEGORIES_REPOSITORY_TOKEN, CATEGORY_NAME_RESOURCE_TOKEN, COMIC_NAME_RESOURCE_TOKEN, COMICS_API_URL_TOKEN, COMICS_REPOSITORY_MAPPING_TOKEN, COMICS_REPOSITORY_TOKEN } from "./repository.tokens";
+import { BACK_END_TOKEN, CATEGORIES_API_URL_TOKEN, CATEGORIES_REPOSITORY_MAPPING_TOKEN, CATEGORIES_REPOSITORY_TOKEN, CATEGORY_NAME_RESOURCE_TOKEN, COMIC_COVER_RESOURCE_TOKEN, COMIC_NAME_RESOURCE_TOKEN, COMICS_API_URL_TOKEN, COMICS_REPOSITORY_MAPPING_TOKEN, COMICS_REPOSITORY_TOKEN, IMAGE_RESOURCE_TOKEN } from "./repository.tokens";
 import { HttpClient } from "@angular/common/http";
 import { Comic } from "../models/comic.model";
 import { IBaseMapping } from "./interfaces/base-mapping.interface";
@@ -9,10 +9,12 @@ import { StrapiRepositoryService } from "./impl/strapi-repository.service";
 import { ComicsRepositoryHttpService } from "./impl/comics-repository-http.service";
 import { ComicsRepositoryLocalStorage } from "./impl/comics-repository-local-storage.service";
 import { ComicsRepositoryStrapiService } from "./impl/comics-repository-strapi.service";
+import { CategoriesRepositoryJSONService } from "./impl/categories-repository-json.service";
+import { CategoriesRepositoryStrapiServerService } from "./impl/categories-repository-strapi-server.service";
 
 export const ComicsRepositoryFactory:FactoryProvider = {
     provide: COMICS_REPOSITORY_TOKEN,
-    useFactory: (backend:string, http:HttpClient, apiURL:string, resource:string, mapping:IBaseMapping<Comic>) => {
+    useFactory: (backend:string, http:HttpClient, apiURL:string, resource:string, image:string, mapping:IBaseMapping<Comic>) => {
         switch(backend) {
             case 'http':
                 return new HttpBaseRepositoryService<Comic>(http, apiURL, resource, mapping)
@@ -23,7 +25,7 @@ export const ComicsRepositoryFactory:FactoryProvider = {
                 break;
                 
             case 'strapi':
-                return new StrapiRepositoryService<Comic>(http, apiURL, resource, mapping)
+                return new StrapiRepositoryService<Comic>(http, apiURL, resource, image, mapping)
                 break;
                 
             /*case 'json':
@@ -35,7 +37,7 @@ export const ComicsRepositoryFactory:FactoryProvider = {
                 break;
         }
     },
-    deps: [BACK_END_TOKEN, HttpClient, COMICS_API_URL_TOKEN, COMIC_NAME_RESOURCE_TOKEN, COMICS_REPOSITORY_MAPPING_TOKEN]
+    deps: [BACK_END_TOKEN, HttpClient, COMICS_API_URL_TOKEN, COMIC_NAME_RESOURCE_TOKEN, COMIC_COVER_RESOURCE_TOKEN, COMICS_REPOSITORY_MAPPING_TOKEN]
 }
 
 export const ComicsMappingFactory:FactoryProvider = {
@@ -64,7 +66,7 @@ export const ComicsMappingFactory:FactoryProvider = {
 
 export const CategoryRepositoryFactory:FactoryProvider = {
     provide: CATEGORIES_REPOSITORY_TOKEN,
-    useFactory: (backend:string, http:HttpClient, apiURL:string, resource:string, mapping:IBaseMapping<Comic>) => {
+    useFactory: (backend:string, http:HttpClient, apiURL:string, resource:string, image:string, mapping:IBaseMapping<Comic>) => {
         switch(backend) {
             case 'http':
                 return new HttpBaseRepositoryService<Comic>(http, apiURL, resource, mapping)
@@ -75,7 +77,7 @@ export const CategoryRepositoryFactory:FactoryProvider = {
                 break;
                 
             case 'strapi':
-                return new StrapiRepositoryService<Comic>(http, apiURL, resource, mapping)
+                return new StrapiRepositoryService<Comic>(http, apiURL, resource, image, mapping)
                 break;
                 
             /*case 'json':
@@ -87,7 +89,7 @@ export const CategoryRepositoryFactory:FactoryProvider = {
                 break;
         }
     },
-    deps: [BACK_END_TOKEN, HttpClient, CATEGORIES_API_URL_TOKEN, CATEGORY_NAME_RESOURCE_TOKEN, CATEGORIES_REPOSITORY_MAPPING_TOKEN]
+    deps: [BACK_END_TOKEN, HttpClient, CATEGORIES_API_URL_TOKEN, CATEGORY_NAME_RESOURCE_TOKEN, IMAGE_RESOURCE_TOKEN, CATEGORIES_REPOSITORY_MAPPING_TOKEN]
 }
 
 export const CategoryMappingFactory:FactoryProvider = {
@@ -95,15 +97,15 @@ export const CategoryMappingFactory:FactoryProvider = {
     useFactory: (backend:string) => {
         switch (backend) {
             case 'http':
-                return new ComicsRepositoryHttpService()
+                return new CategoriesRepositoryJSONService()
                 break;
         
             case 'local-storage':
-                return new ComicsRepositoryLocalStorage()
+                throw new Error("BACKEND NOT IMPLEMENTED")
                 break;
                 
             case 'strapi':
-                return new ComicsRepositoryStrapiService()
+                return new CategoriesRepositoryStrapiServerService()
                 break;
 
             default:

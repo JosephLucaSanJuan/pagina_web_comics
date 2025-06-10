@@ -7,11 +7,11 @@ const routes: Routes = [
   /*{
     path: '',
     component: ComicProfilePage
-  },*/
+  },
   {
     path: ':id',
     component: ComicProfilePage
-  }
+  }*/
 ];
 
 @NgModule({

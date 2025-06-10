@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, InfiniteScrollCustomEvent, ModalController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Category } from 'src/app/core/models/category.model';
 import { Comic } from 'src/app/core/models/comic.model';
@@ -38,7 +38,7 @@ export class ComicsPage implements OnInit {
         this.categorySVC.getById(categoryID).subscribe({
           next: response => {
             this.category = response ?? undefined;
-            this.getComics(null, this.category);
+            this.getComics(this.category);
           },
           error:(error:any)=>{
             console.log(error)
@@ -55,13 +55,14 @@ export class ComicsPage implements OnInit {
   pages:number = 0
   pageSize:number = 25
 
-  getComics(notify:HTMLIonInfiniteScrollElement|null=null, category?:Category){
+  getComics(category?:Category){
     if (category && category?.id) {
       this.comicSVC.getAll(this.page, this.pageSize, {category: category.id}).subscribe({
         next:(response:Paginated<Comic>)=>{
           this._comics.next([...this._comics.value, ...response.data])
           this.page++
-          notify?.complete()
+          this.pages = response.pages
+          console.log(response)
         }
       })
     } else {
@@ -69,15 +70,29 @@ export class ComicsPage implements OnInit {
         next:(response:Paginated<Comic>)=>{
           this._comics.next([...this._comics.value, ...response.data])
           this.page++
-          notify?.complete()
+          this.pages = response.pages
           console.log(response)
         }
       })
     }
   }
 
+  getMoreComics(notify:HTMLIonInfiniteScrollElement|null=null){
+    this.comicSVC.getAll(this.page, this.pageSize).subscribe({
+      next:(response:Paginated<Comic>)=>{
+        this._comics.next([...this._comics.value, ...response.data])
+        this.page++
+        notify?.complete()
+      }
+    })
+  }
+
   seeComic(id:string){
     this.router.navigate(['/comics', id])
+  }
+
+  onIonInfinite(ev:InfiniteScrollCustomEvent) {
+    this.getMoreComics(ev.target)
   }
 
 }

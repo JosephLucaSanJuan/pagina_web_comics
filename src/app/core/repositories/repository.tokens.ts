@@ -6,6 +6,8 @@ export const NAME_RESOURCE_TOKEN = new InjectionToken<string>('NameResource')
 export const COMIC_NAME_RESOURCE_TOKEN = new InjectionToken<string>('ComicNameResource')
 export const CATEGORY_NAME_RESOURCE_TOKEN = new InjectionToken<string>('CategoryNameResource')
 export const COMIC_PROFILE_NAME_RESOURCE_TOKEN = new InjectionToken<string>('ComicProfileNameResource')
+export const IMAGE_RESOURCE_TOKEN = new InjectionToken<string>('ResourceImage')
+export const COMIC_COVER_RESOURCE_TOKEN = new InjectionToken<string>('ComicCoverResource')
 
 export const API_URL_TOKEN = new InjectionToken<string>('ApiUrl')
 export const COMICS_API_URL_TOKEN = new InjectionToken<string>('ComicsApiUrl')
